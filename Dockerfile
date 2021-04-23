@@ -1,14 +1,12 @@
 FROM python:3.6
 
+ENV PYTHONUNBUFFERED=1
 ENV FLASK_APP run.py
 
-COPY manage.py gunicorn-cfg.py requirements.txt .env ./
-COPY coinmena coinmena
-
+WORKDIR /code
+COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-
-RUN python manage.py makemigrations
-RUN python manage.py migrate
+COPY . /code/
 
 EXPOSE 5005
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
+CMD ["gunicorn", "--config", "gunicorn-cfg.py", "coinmena.wsgi"]
