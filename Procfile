@@ -1,1 +1,1 @@
-web: gunicorn core.wsgi --preload --log-file=-
+web: gunicorn coinmena.wsgi --preload --log-file=-
