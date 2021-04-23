@@ -1,7 +1,14 @@
-# syntax=docker/dockerfile:1
-FROM python:3
-ENV PYTHONUNBUFFERED=1
-WORKDIR /code
-COPY requirements.txt /code/
+FROM python:3.6
+
+ENV FLASK_APP run.py
+
+COPY manage.py gunicorn-cfg.py requirements.txt .env ./
+COPY coinmena coinmena
+
 RUN pip install -r requirements.txt
-COPY . /code/
+
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+
+EXPOSE 5005
+CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
