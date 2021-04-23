@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'coinmena.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dfmdnm8sicb2kl',
+        'USER': 'gdmphnjsewdnai',
+        'PASSWORD': '96de45220365ec6b4ac46ad34aa6945f3bc83f4c8e0b624c441f2a35d264ec39',
+        'HOST': 'ec2-3-234-85-177.compute-1.amazonaws.com',
         'PORT': 5432,
     }
 }
