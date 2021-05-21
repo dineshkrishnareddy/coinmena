@@ -39,8 +39,15 @@ curl -X POST -H "Authorization: Api-Key <API_KEY>" -d "{\"from_currency\": \"USD
 curl -X GET -H "Authorization: Api-Key <API_KEY>" http://localhost:8000/api/v1/quotes/?from_currency=USD&to_currency=JPY
 ```
 
-### NOTE
-Without Authorization exchange rate API will return error. Authorization API_KEY can be generated as the above steps
-
 ## Generating exchange rate every hour
-Created a management command to get exchange rate and save it in the DB, we can run it every hour as cron job.
+We created a celery beat periodic task to populate exchange rate every hour.
+We used redis as the message broker for celery
+
+### How to run celery beat and celery worker manually
+```bash
+celery -A coinmena beat -l info
+celery -A coinmena worker -l info
+```
+### NOTE
+1. Without Authorization exchange rate API will return error. Authorization API_KEY can be generated as the above steps
+2. `docker-compose` command will run celery tasks also along with web.
